@@ -1,14 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:coffeeapp/services/auth.dart';
 
 class Home extends StatelessWidget {
-  const Home({Key? key}) : super(key: key);
+  final AuthService _auth = AuthService();
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Container(
-        decoration: BoxDecoration(color: Colors.blue),
-        child: Text('hiiiiiii'),
+        child: Scaffold(
+          backgroundColor: Colors.brown[50],
+          appBar: AppBar(
+            title: Text('Specific Coffee'),
+            backgroundColor: Colors.brown[400],
+            elevation: 0.0,
+            actions: <Widget>[
+              ElevatedButton.icon(
+                icon: Icon(Icons.person),
+                label: Text('logout'),
+                onPressed: () async {
+                  await _auth.signOut();
+                },
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

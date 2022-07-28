@@ -1,6 +1,9 @@
+import 'package:coffeeapp/models/user.dart';
 import 'package:coffeeapp/screens/wrapper.dart';
+import 'package:coffeeapp/services/auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -14,12 +17,17 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme:
-          ThemeData(primarySwatch: Colors.blue, backgroundColor: Colors.blue),
-      home: Wrapper(),
+    return StreamProvider<Profile?>.value(
+      catchError: (_, __) => null,
+      value: AuthService().user,
+      initialData: null,
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Flutter Demo',
+        theme:
+            ThemeData(primarySwatch: Colors.blue, backgroundColor: Colors.blue),
+        home: Wrapper(),
+      ),
     );
   }
 }
