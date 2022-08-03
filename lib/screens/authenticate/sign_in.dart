@@ -12,6 +12,8 @@ class SignIn extends StatefulWidget {
 
 class _SignInState extends State<SignIn> {
   final AuthService _auth = AuthService();
+  final _formKey = GlobalKey<FormState>();
+  String error = '';
   String email = '';
   String password = '';
   @override
@@ -23,7 +25,7 @@ class _SignInState extends State<SignIn> {
         elevation: 0.0,
         title: Text('Sign in to Specific Coffee :-)'),
         actions: <Widget>[
-          FlatButton.icon(
+          ElevatedButton.icon(
             icon: Icon(Icons.person),
             label: Text('Register'),
             onPressed: () => widget.toggleView(),
@@ -33,10 +35,12 @@ class _SignInState extends State<SignIn> {
       body: Container(
         padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
         child: Form(
+          key: _formKey,
           child: Column(
             children: <Widget>[
               SizedBox(height: 20.0),
               TextFormField(
+                validator: (val) => val!.isEmpty ? 'Enter an email' : null,
                 onChanged: (val) {
                   setState(() => email = val);
                 },
@@ -44,6 +48,8 @@ class _SignInState extends State<SignIn> {
               SizedBox(height: 20.0),
               TextFormField(
                 obscureText: true,
+                validator: (val) =>
+                    val!.length < 6 ? 'Enter a password 6+ chars long' : null,
                 onChanged: (val) {
                   setState(() => password = val);
                 },
@@ -56,8 +62,17 @@ class _SignInState extends State<SignIn> {
                     style: TextStyle(color: Colors.white),
                   ),
                   onPressed: () async {
-                    print(email);
-                    print(password);
+                    // print(email);
+                    // print(password);
+                    if (_formKey.currentState!.validate()) {
+                      dynamic result = await _auth.signInWithEmailAndPassword(
+                          email, password);
+                      if (result == null) {
+                        setState(() {
+                          error = 'Could not sign in with those credentials';
+                        });
+                      }
+                    }
                   }),
               ElevatedButton(
                 child: Text('sign in anonymous'),
