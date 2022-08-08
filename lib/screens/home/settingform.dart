@@ -35,7 +35,7 @@ class _SettingsFormState extends State<SettingsForm> {
               child: Column(
                 children: <Widget>[
                   Text(
-                    'Update your brew settings.',
+                    'Update your Preferences.',
                     style: TextStyle(fontSize: 18.0),
                   ),
                   SizedBox(height: 20.0),
@@ -79,9 +79,17 @@ class _SettingsFormState extends State<SettingsForm> {
                         style: TextStyle(color: Colors.white),
                       ),
                       onPressed: () async {
-                        print(_currentName);
-                        print(_currentSugars);
-                        print(_currentStrength);
+                        if (_formKey.currentState!.validate()) {
+                          await DatabaseService(uid: user.uid).updateUserData(
+                              _currentSugars ?? profildata!.sugars.toString(),
+                              _currentName ?? profildata!.name.toString(),
+                              _currentStrength ??
+                                  profildata!.strength!.toInt());
+                          Navigator.pop(context);
+                        }
+                        // print(_currentName);
+                        // print(_currentSugars);
+                        // print(_currentStrength);
                       }),
                 ],
               ),

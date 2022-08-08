@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:coffeeapp/models/user.dart';
 import 'package:coffeeapp/screens/home/coffeelist.dart';
 import 'package:coffeeapp/screens/home/settingform.dart';
 import 'package:coffeeapp/services/database.dart';
@@ -8,6 +9,9 @@ import 'package:provider/provider.dart';
 import 'package:coffeeapp/models/coffee.dart';
 
 class Home extends StatefulWidget {
+  final String? userid;
+
+  const Home(Profile user, {super.key, this.userid});
   @override
   State<Home> createState() => _HomeState();
 }
@@ -17,6 +21,7 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<Profile?>(context);
     void _showSettingsPanel() {
       showModalBottomSheet(
           context: context,
@@ -34,7 +39,7 @@ class _HomeState extends State<Home> {
       child: Scaffold(
         backgroundColor: Colors.brown[50],
         appBar: AppBar(
-          title: Text('Specific Coffee'),
+          title: Text('${user?.email}'),
           backgroundColor: Colors.brown[400],
           elevation: 0.0,
           actions: <Widget>[

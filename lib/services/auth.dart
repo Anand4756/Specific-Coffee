@@ -5,7 +5,7 @@ import 'package:coffeeapp/services/database.dart';
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   Profile _userFromFirebaseUser(User? user) {
-    return Profile(uid: user!.uid);
+    return Profile(uid: user!.uid, email: user.email);
   }
 
   Stream<Profile> get user {

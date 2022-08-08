@@ -1,7 +1,11 @@
 class Profile {
   final String? uid;
+  final String? email;
 
-  Profile({required this.uid});
+  Profile({
+    required this.uid,
+    required this.email,
+  });
 }
 
 class Profiledata {
