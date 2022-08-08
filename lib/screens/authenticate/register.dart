@@ -18,6 +18,7 @@ class _RegisterState extends State<Register> {
   // text field state
   String email = '';
   String password = '';
+  String name = '';
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +44,17 @@ class _RegisterState extends State<Register> {
             children: <Widget>[
               SizedBox(height: 20.0),
               TextFormField(
+                decoration: new InputDecoration.collapsed(
+                  hintText: 'Name',
+                ),
+                validator: (val) => val!.isEmpty ? 'Enter your name' : null,
+                onChanged: (val) {
+                  setState(() => name = val);
+                },
+              ),
+              SizedBox(height: 20.0),
+              TextFormField(
+                decoration: new InputDecoration.collapsed(hintText: 'Email'),
                 validator: (val) => val!.isEmpty ? 'Enter an email' : null,
                 onChanged: (val) {
                   setState(() => email = val);
@@ -50,6 +62,7 @@ class _RegisterState extends State<Register> {
               ),
               SizedBox(height: 20.0),
               TextFormField(
+                decoration: new InputDecoration.collapsed(hintText: 'Password'),
                 obscureText: true,
                 validator: (val) =>
                     val!.length < 6 ? 'Enter a password 6+ chars long' : null,
@@ -58,7 +71,7 @@ class _RegisterState extends State<Register> {
                 },
               ),
               SizedBox(height: 20.0),
-              RaisedButton(
+              ElevatedButton(
                   child: Text(
                     'Register',
                     style: TextStyle(color: Colors.white),
