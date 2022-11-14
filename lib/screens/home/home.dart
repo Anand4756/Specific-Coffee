@@ -10,8 +10,9 @@ import 'package:coffeeapp/models/coffee.dart';
 
 class Home extends StatefulWidget {
   final String? userid;
+  final String? name;
 
-  const Home(Profile user, {super.key, this.userid});
+  const Home(Profile user, {super.key, this.userid, this.name});
   @override
   State<Home> createState() => _HomeState();
 }

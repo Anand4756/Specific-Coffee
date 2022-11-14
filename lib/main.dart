@@ -4,7 +4,7 @@ import 'package:coffeeapp/services/auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+//read about streams
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -30,3 +30,7 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+//queries
+//about snapshot
+//get in database.dart file

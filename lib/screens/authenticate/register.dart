@@ -43,15 +43,15 @@ class _RegisterState extends State<Register> {
           child: Column(
             children: <Widget>[
               SizedBox(height: 20.0),
-              TextFormField(
-                decoration: new InputDecoration.collapsed(
-                  hintText: 'Name',
-                ),
-                validator: (val) => val!.isEmpty ? 'Enter your name' : null,
-                onChanged: (val) {
-                  setState(() => name = val);
-                },
-              ),
+              // TextFormField(
+              //   decoration: new InputDecoration.collapsed(
+              //     hintText: 'Name',
+              //   ),
+              //   validator: (val) => val!.isEmpty ? 'Enter your name' : null,
+              //   onChanged: (val) {
+              //     setState(() => name = val);
+              //   },
+              // ),
               SizedBox(height: 20.0),
               TextFormField(
                 decoration: new InputDecoration.collapsed(hintText: 'Email'),
@@ -79,7 +79,7 @@ class _RegisterState extends State<Register> {
                   onPressed: () async {
                     if (_formKey.currentState!.validate()) {
                       dynamic result = await _auth.registerWithEmailAndPassword(
-                          email, password);
+                          name, email, password);
                       if (result == null) {
                         setState(() {
                           error = 'Please supply a valid email';
